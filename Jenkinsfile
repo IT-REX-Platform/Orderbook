@@ -31,5 +31,14 @@ pipeline {
                 sh 'touch /srv/Backend/orderbook/deploy'
             }
         }
+        stage('Release') {
+            when { allOf { branch 'dev'; triggeredBy 'UserIdCause' } }
+            steps {
+                sshagent (credentials: ['Github']) {
+                    echo 'Pushing dev to main'
+                    sh 'git push git@github.com:IT-REX-Platform/Gateway.git dev:main'
+                }
+            }
+        }
     }
 }
