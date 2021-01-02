@@ -35,7 +35,7 @@ pipeline {
             steps {
                 sshagent (credentials: ['Github']) {
                     echo 'Pushing dev to main'
-                    sh 'git push git@github.com:IT-REX-Platform/Gateway.git dev:main'
+                    sh 'git push git@github.com:IT-REX-Platform/Orderbook.git dev:main'
                 }
             }
         }
