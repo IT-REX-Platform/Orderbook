@@ -36,7 +36,7 @@ pipeline {
                 sshagent (credentials: ['jenkins']) {
                     echo 'Pushing dev to main'
                     sh 'git push git@github.com:IT-REX-Platform/Orderbook.git dev:main'
-                }
+                } 
             }
         }
     }
