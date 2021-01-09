@@ -26,6 +26,20 @@ pipeline {
                 echo 'Testing..'
             }
         }
+        stage('Sonarqube') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh './gradlew sonarqube'
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    // Needs to be changed to true in the real project.
+                    waitForQualityGate abortPipeline: false
+                }
+            }
+        }
         stage('Deploy') {
             when {
                 branch 'main'
