@@ -46,7 +46,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying....'
-                sh 'rm -rf /srv/Backend/orderbook/*'
+                sh 'rm -rf /srv/Backend/cd/orderbook/*'
                 sh 'cd ./build && mv jib-image.tar /srv/Backend/cd/orderbook/orderbook.tar'
                 sh 'touch /srv/Backend/cd/orderbook/deploy'
             }
