@@ -24,7 +24,6 @@ plugins {
     id "org.liquibase.gradle"
     id "org.sonarqube"
     id "io.spring.nohttp"
-    id 'checkstyle'
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
 }
 
@@ -39,8 +38,6 @@ assert System.properties["java.specification.version"] == "1.8" || "11" || "12" 
 
 apply from: "gradle/docker.gradle"
 apply from: "gradle/sonar.gradle"
-apply plugin: "checkstyle"
-checkstyle { config = rootProject.resources.text.fromFile('checkstyle.xml') }
 
 //jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
