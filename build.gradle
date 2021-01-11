@@ -24,6 +24,7 @@ plugins {
     id "org.liquibase.gradle"
     id "org.sonarqube"
     id "io.spring.nohttp"
+    id 'checkstyle'
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
 }
 
@@ -32,12 +33,15 @@ version = "0.0.1-SNAPSHOT"
 
 description = ""
 
-sourceCompatibility=1.8
-targetCompatibility=1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 assert System.properties["java.specification.version"] == "1.8" || "11" || "12" || "13" || "14"
 
 apply from: "gradle/docker.gradle"
 apply from: "gradle/sonar.gradle"
+apply plugin: "checkstyle"
+checkstyle { config = rootProject.resources.text.fromFile('checkstyle.xml') }
+
 //jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
 if (project.hasProperty("prod") || project.hasProperty("gae")) {
@@ -242,7 +246,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     testImplementation "org.testcontainers:postgresql"
     implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation ("org.springframework.boot:spring-boot-starter-web") {
+    implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
     implementation "org.springframework.boot:spring-boot-starter-undertow"
@@ -261,7 +265,7 @@ dependencies {
     implementation "org.springframework.security:spring-security-web"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-    implementation ("io.springfox:springfox-swagger2") {
+    implementation("io.springfox:springfox-swagger2") {
         exclude module: "mapstruct"
     }
     implementation "io.springfox:springfox-bean-validators"
@@ -272,7 +276,7 @@ dependencies {
     annotationProcessor "org.hibernate:hibernate-jpamodelgen:${hibernate_version}"
     annotationProcessor "org.glassfish.jaxb:jaxb-runtime:${jaxb_runtime_version}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"
-    testImplementation ("org.springframework.boot:spring-boot-starter-test") {
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude group: "org.junit.vintage", module: "junit-vintage-engine"
     }
     testImplementation "org.springframework.security:spring-security-test"
